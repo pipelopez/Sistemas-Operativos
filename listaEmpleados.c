@@ -1,7 +1,7 @@
 /*
  * PLANTILLA VACIA, VERSION 1.
- * Name         : listaEmpleados.c
- * Compilation  : gcc -Wall listaEmpleados.c -o 1.out
+ * Name         : evalX_LopezFelipe.c
+ * Compilation  : gcc -Wall evalX_LopezFelipe.c -o 1.out
  * Execution    : ./1.out
 */
 
@@ -62,6 +62,7 @@ int main(int argc, char *argv[]) {
             registerEmployees(nombres, salarios);
             break;
             case 'b':
+            printf("El salario total es: ");
             getTotal(salarios, &total);
             break;
             case 'c':
@@ -101,8 +102,7 @@ void getOption(char *_option){
 
 //Punto 2 (40%) Registrar empleados
 void registerEmployees(char (*_nombres)[MAX_CHARACTER_NAME], float *_salarios){
-    int i;
-    //int num=0;
+    int i, num=0;
     int num_new_employees=0;
     printf("\nIngrese el número de empleados a registrar: ");
     setbuf(stdin, NULL);
@@ -132,12 +132,12 @@ void registerEmployees(char (*_nombres)[MAX_CHARACTER_NAME], float *_salarios){
         printf("Salario: ");//Verifica que el salario sea un número
         setbuf(stdin, NULL);
         scanf("%f", _salarios+i);
-        num = atoi(*((char *)(_nombres+i)));
-        printf("El número ingresado fue: %d", num);
-        /*if(num<=0){
+        
+        num = *(_salarios+i);
+        if(num<=0){
             printf("El valor ingresado no es válido");
             return;
-        }*/
+        }
     }
     
     //Actualizar valores e informar al usuario
@@ -160,7 +160,7 @@ void getTotal(float *_salarios, float *_total){
         *_total += *(_salarios+i);
     }
     
-    printf("El total de salarios es: %.2f\n", *_total);
+    printf("%.2f\n", *_total);
 }
 
 //Punt0 4 (20) mostrar la lista
@@ -180,5 +180,6 @@ void showList(char (*_nombres)[MAX_CHARACTER_NAME], float *_salarios, float *_to
     }
     
     //Listar el total
-    printf("|%-15s|%-15.2f|\n", "Total", *_total);
+    printf("|%-15s|", "Total");
+    getTotal(_salarios, _total);
 }
