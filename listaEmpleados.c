@@ -42,7 +42,9 @@ int main(int argc, char *argv[]) {
     
     // Obtengo el argumento y lo convierto a número
     max_employees = atoi(argv[1]);//convierte lo que recibe a número
+    setbuf(stdin, NULL); //limpiar el bufer
     printf("\nEl valor ingresado fue: %d\n", max_employees);
+    
     
     /* Obtener espacio dinámico en memoria. */
     nombres = (char (*)[MAX_CHARACTER_NAME]) malloc(sizeof(char[MAX_CHARACTER_NAME]) * max_employees);
@@ -102,7 +104,7 @@ void getOption(char *_option){
 
 //Punto 2 (40%) Registrar empleados
 void registerEmployees(char (*_nombres)[MAX_CHARACTER_NAME], float *_salarios){
-    int i, num=0;
+    int i;
     int num_new_employees=0;
     printf("\nIngrese el número de empleados a registrar: ");
     setbuf(stdin, NULL);
@@ -132,11 +134,11 @@ void registerEmployees(char (*_nombres)[MAX_CHARACTER_NAME], float *_salarios){
         printf("Salario: ");//Verifica que el salario sea un número
         setbuf(stdin, NULL);
         scanf("%f", _salarios+i);
-        
-        num = *(_salarios+i);
-        if(num<=0){
-            printf("El valor ingresado no es válido");
-            return;
+        while(*(_salarios+i)<=0){
+            _salarios+i==0;
+            printf("\nEl valor ingresado no es válido.\nIngrese de nuevo el salario:");
+            setbuf(stdin, NULL);
+            scanf("%f", _salarios+i);
         }
     }
     
@@ -183,3 +185,4 @@ void showList(char (*_nombres)[MAX_CHARACTER_NAME], float *_salarios, float *_to
     printf("|%-15s|", "Total");
     getTotal(_salarios, _total);
 }
+
