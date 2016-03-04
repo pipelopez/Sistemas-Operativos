@@ -101,7 +101,7 @@ void getOption(char *_option){
 
 //Punto 2 (40%) Registrar empleados
 void registerEmployees(char (*_nombres)[MAX_CHARACTER_NAME], float *_salarios){
-    int i, num=0;
+    int i;
     int num_new_employees=0;
     printf("\nIngrese el número de empleados a registrar: ");
     setbuf(stdin, NULL);
@@ -131,12 +131,6 @@ void registerEmployees(char (*_nombres)[MAX_CHARACTER_NAME], float *_salarios){
         printf("Salario: ");//Verifica que el salario sea un número
         setbuf(stdin, NULL);
         scanf("%f", _salarios+i);
-        num = atoi(*((char *)(_nombres+i)));
-        printf("El número ingresado fue: %d", num);
-        if(num<=0){
-            printf("El valor ingresado no es válido");
-            return;
-        }
     }
     
     //Actualizar valores e informar al usuario
